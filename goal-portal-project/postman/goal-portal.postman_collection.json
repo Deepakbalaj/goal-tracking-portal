@@ -1,0 +1,69 @@
+{
+  "info": {
+    "name": "In-House Goal Setting & Tracking Portal",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "http://localhost:5000/api" },
+    { "key": "token", "value": "" },
+    { "key": "goalId", "value": "" },
+    { "key": "sheetId", "value": "" }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [{ "key": "token", "value": "{{token}}", "type": "string" }]
+  },
+  "item": [
+    {
+      "name": "Auth - Login",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "url": "{{baseUrl}}/auth/login",
+        "body": {
+          "mode": "raw",
+          "raw": "{\"email\":\"admin@goalportal.com\",\"password\":\"Password@123\"}"
+        }
+      }
+    },
+    { "name": "Auth - Me", "request": { "method": "GET", "url": "{{baseUrl}}/auth/me" } },
+    { "name": "Dashboard Analytics", "request": { "method": "GET", "url": "{{baseUrl}}/reports/dashboard" } },
+    { "name": "List Goals", "request": { "method": "GET", "url": "{{baseUrl}}/goals" } },
+    {
+      "name": "Create Goal",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "url": "{{baseUrl}}/goals",
+        "body": {
+          "mode": "raw",
+          "raw": "{\"cycle\":\"REPLACE_CYCLE_ID\",\"thrustArea\":\"Customer Success\",\"title\":\"Improve NPS\",\"description\":\"Raise NPS through structured account reviews\",\"uomType\":\"numeric\",\"measurementType\":\"min\",\"target\":60,\"weightage\":20,\"deadline\":\"2027-03-31\"}"
+        }
+      }
+    },
+    { "name": "Submit Goal Sheet", "request": { "method": "POST", "url": "{{baseUrl}}/goals/sheet/{{sheetId}}/submit" } },
+    {
+      "name": "Approval Decision",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "url": "{{baseUrl}}/approvals/{{sheetId}}/decision",
+        "body": { "mode": "raw", "raw": "{\"decision\":\"approve\",\"comment\":\"Approved\"}" }
+      }
+    },
+    {
+      "name": "Update Q1 Check-in",
+      "request": {
+        "method": "PUT",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "url": "{{baseUrl}}/check-ins/{{goalId}}/q1",
+        "body": { "mode": "raw", "raw": "{\"actual\":80,\"status\":\"on_track\"}" }
+      }
+    },
+    { "name": "Export CSV", "request": { "method": "GET", "url": "{{baseUrl}}/reports/achievements?format=csv" } },
+    { "name": "Export Excel", "request": { "method": "GET", "url": "{{baseUrl}}/reports/achievements?format=xlsx" } },
+    { "name": "Admin - Users", "request": { "method": "GET", "url": "{{baseUrl}}/admin/users" } },
+    { "name": "Admin - Cycles", "request": { "method": "GET", "url": "{{baseUrl}}/admin/cycles" } },
+    { "name": "Admin - Audit Logs", "request": { "method": "GET", "url": "{{baseUrl}}/admin/audit-logs" } }
+  ]
+}
