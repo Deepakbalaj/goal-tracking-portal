@@ -73,9 +73,13 @@ npm run dev
 Start Frontend
 cd client
 npm start
-🌐 Live Demo
+🌐 Goal Setting & Tracking Portal Live Demo
 
-Goal Setting & Tracking Portal Live Demo
+A full-stack web application developed for ATOMQUEST HACKATHON 1.0 that enables employees to create and track goals, managers to approve and review progress, and admins to manage organizational workflows through dashboards, analytics, audit logs, and quarterly performance tracking.
+
+
+
+[Goal Setting & Tracking Portal Live Demo](https://durham-wellington-sixth-probability.trycloudflare.com)
 
 👤 Demo Credentials
 Employee
